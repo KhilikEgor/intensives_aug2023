@@ -1,13 +1,26 @@
 package ru.yandex.tasks;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Task4DFS {
-    public void runSearch() {
+
+    static List<Integer> result = new LinkedList<>();
+
+    public static void runSearch(int[][] tree, int nodeIndex) {
         /*
          * Реализация dfs
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+        if (tree[nodeIndex][0] != -1) {
+            runSearch(tree, tree[nodeIndex][0]);
+        }
+        if (tree[nodeIndex][1] != -1) {
+            runSearch(tree, tree[nodeIndex][1]);
+        }
+        result.add(nodeIndex);
+
     }
 
     public static int[] getDFSOrder(int[][] tree, int root) {
@@ -19,7 +32,12 @@ public class Task4DFS {
          * root - корень, откуда нужно начинать обход
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+        result.clear();
+        runSearch(tree, root);
+        int[] ans = new int[result.size()];
+        for(int i = 0; i < result.size(); i++)
+            ans[i] = result.get(i);
+        return ans;
     }
 
     public static void selfCheck() {
