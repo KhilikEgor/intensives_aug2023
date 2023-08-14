@@ -10,7 +10,19 @@ public class Task2SelectionSort {
          * Выход: отсортированный (сортировкой выбором!) numbers
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+        int length = numbers.size();
+        for (int i = 0; i < length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < length; j++) {
+                if(numbers.get(minIndex) > numbers.get(j)){
+                    minIndex = j;
+                }
+            }
+            int temp = numbers.get(minIndex);
+            numbers.set(minIndex, numbers.get(i));
+            numbers.set(i, temp);
+        }
+        return numbers;
     }
 
     public static void selfCheck() {
