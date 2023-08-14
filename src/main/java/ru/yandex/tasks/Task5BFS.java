@@ -1,13 +1,30 @@
 package ru.yandex.tasks;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class Task5BFS {
-    public void runSearch() {
+    static List<Integer> result = new LinkedList<>();
+    static Queue<Integer> toCompute = new LinkedList<>();
+    public static void runSearch(int[][] tree, int root) {
+        toCompute.add(root);
         /*
          * Реализация bfs
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+        while(!toCompute.isEmpty()){
+            root = toCompute.poll();
+            if (tree[root][0] != -1) {
+                toCompute.add(tree[root][0]);
+            }
+            if (tree[root][1] != -1) {
+                toCompute.add(tree[root][1]);
+            }
+            result.add(root);
+
+        }
     }
 
     public static int[] getBFSOrder(int[][] tree, int root) {
@@ -18,7 +35,13 @@ public class Task5BFS {
          * root - корень, откуда нужно начинать обход
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+        toCompute.clear();
+        result.clear();
+        runSearch(tree, root);
+        int[] ans = new int[result.size()];
+        for(int i = 0; i < result.size(); i++)
+            ans[i] = result.get(i);
+        return ans;
     }
 
     public static void selfCheck() {
